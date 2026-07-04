@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMW E30 — The Legend</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Fixed WebGL canvas layer -->
+  <canvas id="scene"></canvas>
+
+  <!-- Scroll progress bar -->
+  <div id="progress"><div id="progress-fill"></div></div>
+
+  <!-- Header -->
+  <nav id="topbar">
+    <a class="brand nav-to" href="#" data-to="0">E30<span class="m-stripes">///</span>FILM</a>
+    <div class="topbar-links">
+      <a class="nav-to" href="#" data-to="0">Home</a>
+      <a class="nav-to" href="#" data-to="0.28">Story</a>
+      <a class="nav-to" href="#" data-to="0.55">Design</a>
+      <a class="nav-to" href="#" data-to="0.82">Details</a>
+      <a class="nav-to" href="#" data-to="1">Fin</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="hero">
+    <div class="hero-panel">
+      <p class="hero-eyebrow">The Ultimate Driving Machine</p>
+      <h1 class="hero-title">BMW E30.<br />The legend<br />lives on.</h1>
+      <p class="hero-sub">A cinematic portrait of Bavaria's most beloved icon &mdash; widebody arches, BBS mesh, timeless proportions.</p>
+    </div>
+  </header>
+
+  <!-- Story captions pinned along the timeline -->
+  <section class="caption" data-at="0.28">
+    <h2>Born in 1982.<br />Ahead ever since.</h2>
+    <p>Boxy, honest, perfectly balanced &mdash; the E30 turned a compact sedan into an icon of driving purity.</p>
+  </section>
+
+  <section class="caption caption-right" data-at="0.55">
+    <h2>Engineering in motion.</h2>
+    <p>Widebody arches, BBS wheels, a stance that needs no introduction. The camera circles &mdash; you set the pace.</p>
+  </section>
+
+  <section class="caption" data-at="0.82">
+    <h2>Frozen in time.</h2>
+    <p>Quad headlights, razor-thin pillars, basket-weave mesh &mdash; details that defined an era of pure driving.</p>
+  </section>
+
+  <!-- Final frame -->
+  <footer class="outro" data-at="0.97">
+    <div class="outro-panel">
+      <h2>Fin. The legend lives on.</h2>
+    </div>
+  </footer>
+
+  <!-- Tall scroll track that defines the timeline length -->
+  <div id="scroll-track"></div>
+
+  <!-- Site footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand nav-to" href="#" data-to="0">E30<span class="m-stripes">///</span>FILM</a>
+        <p>A cinematic portrait of Bavaria's most beloved icon, told frame by frame.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Chapters</h3>
+        <a class="nav-to" href="#" data-to="0">Home</a>
+        <a class="nav-to" href="#" data-to="0.28">Story</a>
+        <a class="nav-to" href="#" data-to="0.55">Design</a>
+        <a class="nav-to" href="#" data-to="0.82">Details</a>
+      </div>
+      <div class="footer-col">
+        <h3>Follow</h3>
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 E30 Film. Built with Three.js.</span>
+      <span>Not affiliated with BMW AG.</span>
+    </div>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

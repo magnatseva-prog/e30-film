@@ -1,0 +1,321 @@
+:root {
+  --bg-top: #03090b;
+  --bg-mid: #071518;
+  --bg-bot: #0a1f24;
+  --ink: #f2fbfd;
+  --ink-dim: rgba(242, 251, 253, 0.88);
+  --accent: #43e8ff;
+  --font-display: "Unbounded", "Segoe UI", sans-serif;
+  --font-body: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bot) 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Fixed WebGL layer */
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+}
+
+/* Scroll progress bar */
+#progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #43e8ff, #3b82f6, #ef4444);
+  transition: width 0.05s linear;
+}
+
+/* Hero */
+.hero {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  padding: 0 24px 0 8vw;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  text-shadow: 0 0 24px rgba(67, 232, 255, 0.55);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6.5vw, 84px);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  background: linear-gradient(115deg, #ffffff 25%, #9ef3ff 55%, #43e8ff 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 4px 30px rgba(3, 20, 26, 0.85));
+}
+
+.hero-sub {
+  margin-top: 28px;
+  font-size: clamp(15px, 1.6vw, 19px);
+  line-height: 1.65;
+  color: var(--ink-dim);
+  max-width: 560px;
+  text-shadow: 0 2px 16px rgba(3, 20, 26, 0.9);
+}
+
+/* Header */
+#topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 5vw;
+  background: linear-gradient(180deg, rgba(3, 9, 11, 0.75) 0%, rgba(3, 9, 11, 0) 100%);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.m-stripes {
+  background: linear-gradient(115deg, #43e8ff 15%, #3b82f6 50%, #ef4444 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  padding: 0 4px;
+}
+
+.topbar-links {
+  display: flex;
+  gap: clamp(16px, 3vw, 40px);
+}
+
+.topbar-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.topbar-links a:hover {
+  color: var(--accent);
+}
+
+/* Frosted panel that keeps text readable over any video frame */
+.hero-panel,
+.caption,
+.outro-panel {
+  background: rgba(4, 16, 20, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(158, 243, 255, 0.14);
+  border-radius: 22px;
+  padding: 32px 36px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.hero-panel {
+  max-width: 640px;
+}
+
+/* Captions along the timeline */
+.caption,
+.outro {
+  position: fixed;
+  z-index: 5;
+  max-width: 420px;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.caption {
+  top: 50%;
+  left: 8vw;
+  transform: translateY(-50%);
+}
+
+.caption-right {
+  left: auto;
+  right: 8vw;
+  text-align: right;
+}
+
+.caption h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  background: linear-gradient(115deg, #ffffff 30%, #9ef3ff 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 4px 24px rgba(3, 20, 26, 0.9));
+}
+
+.caption p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-dim);
+  text-shadow: 0 2px 14px rgba(3, 20, 26, 0.95);
+}
+
+.outro {
+  inset: 0;
+  max-width: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.outro h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4vw, 52px);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.2;
+  max-width: 20ch;
+  background: linear-gradient(115deg, #ffffff 25%, #9ef3ff 55%, #43e8ff 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 4px 30px rgba(3, 20, 26, 0.85));
+}
+
+/* The invisible element that gives the page its scrollable length */
+#scroll-track {
+  /* 600vh / 0.6 — 40% slower timeline per unit of scroll */
+  height: 1000vh;
+  pointer-events: none;
+}
+
+/* Site footer */
+.site-footer {
+  position: relative;
+  z-index: 6;
+  background: #04090b;
+  border-top: 1px solid rgba(158, 243, 255, 0.14);
+  padding: 64px 8vw 28px;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 80px;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  max-width: 340px;
+}
+
+.footer-brand .brand {
+  font-size: 20px;
+}
+
+.footer-brand p {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-dim);
+}
+
+.footer-col h3 {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--ink-dim);
+  text-decoration: none;
+  margin-bottom: 12px;
+  transition: color 0.25s ease;
+}
+
+.footer-col a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 48px auto 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(242, 251, 253, 0.08);
+  font-size: 12px;
+  color: rgba(242, 251, 253, 0.45);
+}
